@@ -1,0 +1,28 @@
+* {
+    border: 1px solid black;
+}
+
+.gamepage {
+    font-family: 'Slackey', 'serif';
+    text-align: center;
+    background-color: powderblue;
+}
+
+.gametitle {
+    padding: 2%;
+    margin: 5%;
+    font-size: 2em;
+    text-shadow: 3px 2px green;
+}
+
+.gamearea {
+    margin: 2%;
+}
+
+.pokemonName {
+    padding: 1%;
+}
+
+.pokemonCard {
+    margin-bottom: 2%;
+}

@@ -1,8 +1,8 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+let express = require('express');
+let bodyParser = require('body-parser');
 
-var app = express();
-var port = 7000;
+let app = express();
+let port = 7000;
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
