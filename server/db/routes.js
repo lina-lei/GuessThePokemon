@@ -1,13 +1,7 @@
 let Pokemon = require('../Pokemon.js');
+let db = require('./index.js');
 
-// exports.getOne = (cb) => {
-//   let randomNum = Math.ceil(Math.random() * 151);
-//   console.log('hi', randomNum);
-//   Pokemon.find({number: randomNum}, cb);
-// };
-
-exports.getOne = function(cb) {
-//   let randomNum = Math.ceil(Math.random() * 151);
-//   console.log('hi', randomNum);
-  Pokemon.findOne({"name": "Mew"}, cb);
+module.exports.getOne = function(cb) {
+  let randomNum = Math.ceil(Math.random() * 151);
+  Pokemon.findOne({number: randomNum}, cb);
 }

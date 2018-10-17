@@ -13,7 +13,8 @@ app.get('/getOne', (req, res) => {
     if (err) {
       console.log('err retrieving random pokemon', err);
     } else {
-      console.log(result);
+      console.log('successfully retrieved random pokemon', result);
+      res.send(result);
     }
   });
 });
