@@ -7,6 +7,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.getOne = this.getOne.bind(this);
+  }
+
+  componentWillMount() {
+    this.getOne();
+  }
+
+  getOne() {
+    axios.get('/getOne')
+    .then(results => console.log('success:', results))
+    .catch(err => console.log(err))
   }
 
   render() {
@@ -14,7 +25,7 @@ class App extends React.Component {
       <div className="gamepage">
         <div className="gametitle">Welcome to the Pokemon Guessing Game!</div>
         <div className="gamearea">
-          <PokemonCard pokemonName="bulbasaur" pokemonPic="http://vignette3.wikia.nocookie.net/nintendo/images/b/bf/Mew.png/revision/latest?cb=20141002090523&path-prefix=en" />
+          <PokemonCard pokemonName="bulbasaur" pokemonTypes={["Grass","Poison"]} pokemonPic="http://vignette3.wikia.nocookie.net/nintendo/images/b/bf/Mew.png/revision/latest?cb=20141002090523&path-prefix=en" />
 
           <form>
             <label>Who's this Pokemon? </label>
