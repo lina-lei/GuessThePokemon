@@ -12,6 +12,7 @@ class App extends React.Component {
         types: [],
         imageUrl: ""
       },
+      displayName: "",
       userGuess: "",
       image: "https://t2.rbxcdn.com/78ed347ce23ee44e76107cbf0dd2720f"
     };
@@ -27,8 +28,18 @@ class App extends React.Component {
   getOne() {
     axios.get('/getOne')
     .then(results => {
-      console.log('success:', results.data)
+      console.log('success:', results.data);
       this.setState({currentPokemon: results.data});
+    })
+    .then(() => {
+      let copy = this.state.currentPokemon.name.slice().split('');
+      let scrambled = '';
+      while(copy.length > 0) {
+        let randomIndex = Math.floor(Math.random() * copy.length);
+        scrambled += copy.splice(randomIndex, 1);
+      }
+      console.log('scrambled', scrambled);
+      this.setState({displayName: scrambled});
     })
     .catch(err => console.log(err))
   }
@@ -40,7 +51,7 @@ class App extends React.Component {
 
   handleUserGuess() {
     if(this.state.userGuess.toLowerCase() === this.state.currentPokemon.name.toLowerCase()) {
-      this.setState({image: this.state.currentPokemon.imageUrl});
+      this.setState({image: this.state.currentPokemon.imageUrl, displayName: this.state.currentPokemon.name});
     }
   }
 
@@ -49,7 +60,7 @@ class App extends React.Component {
       <div className="gamepage">
         <div className="gametitle">Welcome to the Pokemon Guessing Game!</div>
         <div className="gamearea">
-          <PokemonCard name={this.state.currentPokemon.name} 
+          <PokemonCard name={this.state.displayName} 
             types={this.state.currentPokemon.types} 
             imageUrl={this.state.image} />
 
