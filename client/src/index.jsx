@@ -6,7 +6,13 @@ import PokemonCard from './PokemonCard.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentPokemon: {
+        name: "bulbasaur",
+        types: ["Grass","Poison"],
+        imageUrl: "http://vignette3.wikia.nocookie.net/nintendo/images/b/bf/Mew.png/revision/latest?cb=20141002090523&path-prefix=en"        
+      }
+    };
     this.getOne = this.getOne.bind(this);
   }
 
@@ -16,7 +22,10 @@ class App extends React.Component {
 
   getOne() {
     axios.get('/getOne')
-    .then(results => console.log('success:', results))
+    .then(results => {
+      console.log('success:', results.data)
+      this.setState({currentPokemon: results.data});
+    })
     .catch(err => console.log(err))
   }
 
@@ -25,7 +34,9 @@ class App extends React.Component {
       <div className="gamepage">
         <div className="gametitle">Welcome to the Pokemon Guessing Game!</div>
         <div className="gamearea">
-          <PokemonCard pokemonName="bulbasaur" pokemonTypes={["Grass","Poison"]} pokemonPic="http://vignette3.wikia.nocookie.net/nintendo/images/b/bf/Mew.png/revision/latest?cb=20141002090523&path-prefix=en" />
+          <PokemonCard name={this.state.currentPokemon.name} 
+            types={this.state.currentPokemon.types} 
+            imageUrl={this.state.currentPokemon.imageUrl} />
 
           <form>
             <label>Who's this Pokemon? </label>
