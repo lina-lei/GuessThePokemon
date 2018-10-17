@@ -10,7 +10,7 @@ class App extends React.Component {
       currentPokemon: {
         name: "bulbasaur",
         types: ["Grass","Poison"],
-        imageUrl: "http://vignette3.wikia.nocookie.net/nintendo/images/b/bf/Mew.png/revision/latest?cb=20141002090523&path-prefix=en"        
+        imageUrl: ""
       }
     };
     this.getOne = this.getOne.bind(this);
