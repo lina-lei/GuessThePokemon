@@ -8,13 +8,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentPokemon: {
-        name: "",
+        name: '',
         types: [],
-        imageUrl: ""
+        imageUrl: '',
       },
-      displayName: "",
-      userGuess: "",
-      image: "https://t2.rbxcdn.com/78ed347ce23ee44e76107cbf0dd2720f"
+      displayName: '',
+      userGuess: '',
+      image: 'https://t2.rbxcdn.com/78ed347ce23ee44e76107cbf0dd2720f',
     };
     this.getOne = this.getOne.bind(this);
     this.userGuess = this.userGuess.bind(this);
@@ -27,31 +27,34 @@ class App extends React.Component {
 
   getOne() {
     axios.get('/getOne')
-    .then(results => {
-      console.log('success:', results.data);
-      this.setState({currentPokemon: results.data});
-    })
-    .then(() => {
-      let copy = this.state.currentPokemon.name.slice().split('');
-      let scrambled = '';
-      while(copy.length > 0) {
-        let randomIndex = Math.floor(Math.random() * copy.length);
-        scrambled += copy.splice(randomIndex, 1);
-      }
-      console.log('scrambled', scrambled);
-      this.setState({displayName: scrambled});
-    })
-    .catch(err => console.log(err))
+      .then((results) => {
+        console.log('success:', results.data);
+        this.setState({ currentPokemon: results.data });
+      })
+      .then(() => {
+        const copy = this.state.currentPokemon.name.slice().split('');
+        let scrambled = '';
+        while (copy.length > 0) {
+          const randomIndex = Math.floor(Math.random() * copy.length);
+          scrambled += copy.splice(randomIndex, 1);
+        }
+        // console.log('scrambled', scrambled);
+        this.setState({ displayName: scrambled });
+      })
+      .catch(err => console.log(err));
   }
 
   userGuess(e) {
     console.log('userGuess:', e.target.value);
-    this.setState({userGuess: e.target.value});
+    this.setState({ userGuess: e.target.value });
   }
 
   handleUserGuess() {
-    if(this.state.userGuess.toLowerCase() === this.state.currentPokemon.name.toLowerCase()) {
-      this.setState({image: this.state.currentPokemon.imageUrl, displayName: this.state.currentPokemon.name});
+    if (this.state.userGuess.toLowerCase() === this.state.currentPokemon.name.toLowerCase()) {
+      this.setState({
+        image: this.state.currentPokemon.imageUrl,
+        displayName: this.state.currentPokemon.name,
+      });
     }
   }
 
@@ -60,19 +63,21 @@ class App extends React.Component {
       <div className="gamepage">
         <div className="gametitle">Welcome to the Pokemon Guessing Game!</div>
         <div className="gamearea">
-          <PokemonCard name={this.state.displayName} 
-            types={this.state.currentPokemon.types} 
-            imageUrl={this.state.image} />
+          <PokemonCard
+            name={this.state.displayName}
+            types={this.state.currentPokemon.types}
+            imageUrl={this.state.image}
+          />
 
           <form>
             <label>Who's this Pokemon? </label>
-            <input type="text" value={this.state.userGuess} onChange={this.userGuess}></input>
+            <input type="text" value={this.state.userGuess} onChange={this.userGuess} />
             <button type="button" onClick={this.handleUserGuess}>Guess!</button>
           </form>
 
         </div>
       </div>
-    )
+    );
   }
 }
 
