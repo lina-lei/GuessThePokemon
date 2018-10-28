@@ -38,18 +38,17 @@ class App extends React.Component {
           const randomIndex = Math.floor(Math.random() * copy.length);
           scrambled += copy.splice(randomIndex, 1);
         }
-        // console.log('scrambled', scrambled);
         this.setState({ displayName: scrambled });
       })
       .catch(err => console.log(err));
   }
 
   userGuess(e) {
-    console.log('userGuess:', e.target.value);
     this.setState({ userGuess: e.target.value });
   }
 
-  handleUserGuess() {
+  handleUserGuess(e) {
+    e.preventDefault();
     if (this.state.userGuess.toLowerCase() === this.state.currentPokemon.name.toLowerCase()) {
       this.setState({
         image: this.state.currentPokemon.imageUrl,
@@ -69,10 +68,10 @@ class App extends React.Component {
             imageUrl={this.state.image}
           />
 
-          <form>
-            <label>Who's this Pokemon? </label>
+          <form onSubmit={this.handleUserGuess}>
+            <label>Who's this Pokemon?</label> <br></br>
             <input type="text" value={this.state.userGuess} onChange={this.userGuess} />
-            <button type="button" onClick={this.handleUserGuess}>Guess!</button>
+            {/* <button type="button" onClick={this.handleUserGuess}>Guess!</button> */}
           </form>
 
         </div>
