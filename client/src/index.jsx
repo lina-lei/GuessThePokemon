@@ -14,7 +14,7 @@ class App extends React.Component {
       },
       displayName: '',
       userGuess: '',
-      image: 'https://t2.rbxcdn.com/78ed347ce23ee44e76107cbf0dd2720f',
+      image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
     };
     this.getOne = this.getOne.bind(this);
     this.userGuess = this.userGuess.bind(this);
