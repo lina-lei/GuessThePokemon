@@ -1,6 +1,6 @@
-* {
+/* * {
     border: 1px solid black;
-}
+} */
 
 .gamepage {
     font-family: 'Slackey', 'serif';
@@ -9,14 +9,15 @@
 }
 
 .gametitle {
-    padding: 2%;
-    margin: 5%;
+    padding: 7% 2% 6% 2%;
+    margin: 1%;
     font-size: 2em;
     text-shadow: 3px 2px green;
+    background-image: url("https://gameusagi.com/wp-content/uploads/2012/03/original-pokemon-550x331.jpg");
 }
 
 .gamearea {
-    margin: 2%;
+    margin: 1%;
 }
 
 .pokemonName {
