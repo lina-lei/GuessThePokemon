@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import PokemonCard from './PokemonCard.jsx';
+import Form from './Form.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class App extends React.Component {
       displayName: '',
       userGuess: '',
       image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
+      playing: true,
+      messageToUser: 'Who\'s This Pokemon?',
     };
     this.getOne = this.getOne.bind(this);
     this.userGuess = this.userGuess.bind(this);
@@ -53,6 +56,8 @@ class App extends React.Component {
       this.setState({
         image: this.state.currentPokemon.imageUrl,
         displayName: this.state.currentPokemon.name,
+        messageToUser: 'You got it right! Play again?',
+        userGuess: '',
       });
     }
   }
@@ -68,11 +73,12 @@ class App extends React.Component {
             imageUrl={this.state.image}
           />
 
-          <form onSubmit={this.handleUserGuess}>
-            <label>Who's this Pokemon?</label> <br></br>
-            <input type="text" value={this.state.userGuess} onChange={this.userGuess} />
-            {/* <button type="button" onClick={this.handleUserGuess}>Guess!</button> */}
-          </form>
+          <Form
+            playing={this.state.playing}
+            messageToUser={this.state.messageToUser}
+            userGuess={this.userGuess}
+            handleUserGuess={this.handleUserGuess}
+          />
 
         </div>
       </div>
