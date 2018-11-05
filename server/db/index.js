@@ -1,6 +1,5 @@
-let mongoose = require('mongoose');
-let uri = 'mongodb://localhost:27017/guesspokemon';
+const mongoose = require('mongoose');
 
-let db = mongoose.connect(uri);
+const db = mongoose.connect('mongodb://pokemon:pokemon1@ds145043.mlab.com:45043/guessthepokemon' || 'mongodb://localhost:27017/guesspokemon');
 
 module.exports = db;

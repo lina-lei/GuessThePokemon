@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import PokemonCard from './PokemonCard.jsx';
+import Form from './Form.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,12 +14,12 @@ class App extends React.Component {
         imageUrl: '',
       },
       displayName: '',
-      userGuess: '',
       image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
+      playing: true,
+      messageToUser: 'Who\'s This Pokemon?',
     };
     this.getOne = this.getOne.bind(this);
-    this.userGuess = this.userGuess.bind(this);
-    this.handleUserGuess = this.handleUserGuess.bind(this);
+    this.handleCorrectGuess = this.handleCorrectGuess.bind(this);
   }
 
   componentWillMount() {
@@ -29,7 +30,12 @@ class App extends React.Component {
     axios.get('/getOne')
       .then((results) => {
         console.log('success:', results.data);
-        this.setState({ currentPokemon: results.data });
+        this.setState({
+          currentPokemon: results.data,
+          image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
+          playing: true,
+          messageToUser: 'Who\'s This Pokemon?',
+        });
       })
       .then(() => {
         const copy = this.state.currentPokemon.name.slice().split('');
@@ -43,18 +49,13 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  userGuess(e) {
-    this.setState({ userGuess: e.target.value });
-  }
-
-  handleUserGuess(e) {
-    e.preventDefault();
-    if (this.state.userGuess.toLowerCase() === this.state.currentPokemon.name.toLowerCase()) {
-      this.setState({
-        image: this.state.currentPokemon.imageUrl,
-        displayName: this.state.currentPokemon.name,
-      });
-    }
+  handleCorrectGuess() {
+    this.setState({
+      displayName: this.state.currentPokemon.name,
+      image: this.state.currentPokemon.imageUrl,
+      playing: false,
+      messageToUser: 'You got it right! Play again?',
+    });
   }
 
   render() {
@@ -68,11 +69,13 @@ class App extends React.Component {
             imageUrl={this.state.image}
           />
 
-          <form onSubmit={this.handleUserGuess}>
-            <label>Who's this Pokemon?</label> <br></br>
-            <input type="text" value={this.state.userGuess} onChange={this.userGuess} />
-            {/* <button type="button" onClick={this.handleUserGuess}>Guess!</button> */}
-          </form>
+          <Form
+            pokemonName={this.state.currentPokemon.name}
+            playing={this.state.playing}
+            messageToUser={this.state.messageToUser}
+            getOne={this.getOne}
+            handleCorrectGuess={this.handleCorrectGuess}
+          />
 
         </div>
       </div>
