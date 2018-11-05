@@ -14,14 +14,12 @@ class App extends React.Component {
         imageUrl: '',
       },
       displayName: '',
-      userGuess: '',
       image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
       playing: true,
       messageToUser: 'Who\'s This Pokemon?',
     };
     this.getOne = this.getOne.bind(this);
-    this.userGuess = this.userGuess.bind(this);
-    this.handleUserGuess = this.handleUserGuess.bind(this);
+    this.handleCorrectGuess = this.handleCorrectGuess.bind(this);
   }
 
   componentWillMount() {
@@ -32,7 +30,12 @@ class App extends React.Component {
     axios.get('/getOne')
       .then((results) => {
         console.log('success:', results.data);
-        this.setState({ currentPokemon: results.data });
+        this.setState({
+          currentPokemon: results.data,
+          image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
+          playing: true,
+          messageToUser: 'Who\'s This Pokemon?',
+        });
       })
       .then(() => {
         const copy = this.state.currentPokemon.name.slice().split('');
@@ -46,20 +49,13 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  userGuess(e) {
-    this.setState({ userGuess: e.target.value });
-  }
-
-  handleUserGuess(e) {
-    e.preventDefault();
-    if (this.state.userGuess.toLowerCase() === this.state.currentPokemon.name.toLowerCase()) {
-      this.setState({
-        image: this.state.currentPokemon.imageUrl,
-        displayName: this.state.currentPokemon.name,
-        messageToUser: 'You got it right! Play again?',
-        userGuess: '',
-      });
-    }
+  handleCorrectGuess() {
+    this.setState({
+      displayName: this.state.currentPokemon.name,
+      image: this.state.currentPokemon.imageUrl,
+      playing: false,
+      messageToUser: 'You got it right! Play again?',
+    });
   }
 
   render() {
@@ -74,10 +70,11 @@ class App extends React.Component {
           />
 
           <Form
+            pokemonName={this.state.currentPokemon.name}
             playing={this.state.playing}
             messageToUser={this.state.messageToUser}
-            userGuess={this.userGuess}
-            handleUserGuess={this.handleUserGuess}
+            getOne={this.getOne}
+            handleCorrectGuess={this.handleCorrectGuess}
           />
 
         </div>
