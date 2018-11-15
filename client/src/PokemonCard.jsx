@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PokemonCard = ({ name, types, imageUrl }) => (
   <div className="pokemonCard">
@@ -10,5 +11,11 @@ const PokemonCard = ({ name, types, imageUrl }) => (
     <img src={imageUrl} alt={name} />
   </div>
 );
+
+PokemonCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  types: PropTypes.arrayOf(PropTypes.string).isRequired,
+  imageUrl: PropTypes.string.isRequired,
+};
 
 export default PokemonCard;

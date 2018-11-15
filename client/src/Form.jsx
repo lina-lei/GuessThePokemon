@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component {
   constructor(props) {
@@ -17,9 +18,11 @@ class Form extends React.Component {
   }
 
   handleUserGuess(e) {
+    const { userGuess } = this.state;
+    const { pokemonName, handleCorrectGuess } = this.props;
     e.preventDefault();
-    if (this.state.userGuess.toLowerCase() === this.props.pokemonName.toLowerCase()) {
-      this.props.handleCorrectGuess();
+    if (userGuess.toLowerCase() === pokemonName.toLowerCase()) {
+      handleCorrectGuess();
       this.setState({
         userGuess: '',
       });
@@ -27,23 +30,33 @@ class Form extends React.Component {
   }
 
   render() {
-    if (this.props.playing) {
+    const { userGuess } = this.state;
+    const { playing, messageToUser, getOne } = this.props;
+    if (playing) {
       return (
         <form onSubmit={this.handleUserGuess}>
-          <label>{this.props.messageToUser}</label>
+          <label>{messageToUser}</label>
           <br />
-          <input type="text" value={this.state.userGuess} onChange={this.userGuess} />
+          <input type="text" value={userGuess} onChange={this.userGuess} />
         </form>
       );
     }
     return (
       <form>
-        <label>{this.props.messageToUser}</label>
+        <label>{messageToUser}</label>
         <br />
-        <button type="button" onClick={this.props.getOne}>Play Again</button>
+        <button type="button" onClick={getOne}>Play Again</button>
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  pokemonName: PropTypes.string.isRequired,
+  playing: PropTypes.bool.isRequired,
+  messageToUser: PropTypes.string.isRequired,
+  getOne: PropTypes.func.isRequired,
+  handleCorrectGuess: PropTypes.func.isRequired,
+};
 
 export default Form;
