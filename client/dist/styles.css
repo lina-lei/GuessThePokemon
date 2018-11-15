@@ -1,19 +1,19 @@
-/* * {
+* {
     border: 1px solid black;
-} */
+}
 
 .gamepage {
     font-family: 'Slackey', 'serif';
     text-align: center;
-    background-color: powderblue;
+    /* background-color: powderblue; */
 }
 
 .gametitle {
-    padding: 7% 2% 6% 2%;
-    /* margin: 1%; */
+    padding: 6% 2%;
     font-size: 2em;
     text-shadow: 3px 2px green;
-    background-image: url("https://gameusagi.com/wp-content/uploads/2012/03/original-pokemon-550x331.jpg");
+    background-image: url("https://cyndiquil721.files.wordpress.com/2014/04/cropped-tumblr_static_cropped-pokemon-pikachu-banner.jpg");
+    background-size: 60%;
 }
 
 .gamearea {

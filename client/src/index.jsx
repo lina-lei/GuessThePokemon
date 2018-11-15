@@ -16,7 +16,7 @@ class App extends React.Component {
       displayName: '',
       image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
       playing: true,
-      messageToUser: 'Who\'s This Pokemon?',
+      messageToUser: '',
     };
     this.getOne = this.getOne.bind(this);
     this.handleCorrectGuess = this.handleCorrectGuess.bind(this);
@@ -50,29 +50,33 @@ class App extends React.Component {
   }
 
   handleCorrectGuess() {
+    const { currentPokemon } = this.state;
     this.setState({
-      displayName: this.state.currentPokemon.name,
-      image: this.state.currentPokemon.imageUrl,
+      displayName: currentPokemon.name,
+      image: currentPokemon.imageUrl,
       playing: false,
       messageToUser: 'You got it right! Play again?',
     });
   }
 
   render() {
+    const {
+      currentPokemon, displayName, image, playing, messageToUser,
+    } = this.state;
     return (
       <div className="gamepage">
         <div className="gametitle">Welcome to the Pokemon Guessing Game!</div>
         <div className="gamearea">
           <PokemonCard
-            name={this.state.displayName}
-            types={this.state.currentPokemon.types}
-            imageUrl={this.state.image}
+            name={displayName}
+            types={currentPokemon.types}
+            imageUrl={image}
           />
 
           <Form
-            pokemonName={this.state.currentPokemon.name}
-            playing={this.state.playing}
-            messageToUser={this.state.messageToUser}
+            pokemonName={currentPokemon.name}
+            playing={playing}
+            messageToUser={messageToUser}
             getOne={this.getOne}
             handleCorrectGuess={this.handleCorrectGuess}
           />
