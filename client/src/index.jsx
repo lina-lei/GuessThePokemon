@@ -29,7 +29,7 @@ class App extends React.Component {
   getOne() {
     axios.get('/getOne')
       .then((results) => {
-        console.log('success:', results.data);
+        // console.log('success:', results.data);
         this.setState({
           currentPokemon: results.data,
           image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
@@ -65,7 +65,11 @@ class App extends React.Component {
     } = this.state;
     return (
       <div className="gamepage">
-        <div className="gametitle">Welcome to the Pokemon Guessing Game!</div>
+        <div className="gametitle">
+          WELCOME TO THE
+          <br />
+          POKEMON GUESSING GAME!
+        </div>
         <div className="gamearea">
           <PokemonCard
             name={displayName}

@@ -37,7 +37,7 @@ class Form extends React.Component {
         <form onSubmit={this.handleUserGuess}>
           <label>{messageToUser}</label>
           <br />
-          <input type="text" value={userGuess} onChange={this.userGuess} />
+          <input type="text" value={userGuess} onChange={this.userGuess} autoFocus />
         </form>
       );
     }

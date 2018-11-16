@@ -1,33 +1,49 @@
-* {
+/* * {
     border: 1px solid black;
-}
+} */
 
 .gamepage {
     font-family: 'Slackey', 'serif';
     text-align: center;
-    /* background-color: powderblue; */
+    background-color: #FFE4B5;
 }
 
 .gametitle {
-    padding: 6% 2%;
-    font-size: 2em;
-    text-shadow: 3px 2px green;
+    padding: 5% 2%;
+    font-size: 2.5em;
+    text-shadow: 3px 2px red;
     background-image: url("https://cyndiquil721.files.wordpress.com/2014/04/cropped-tumblr_static_cropped-pokemon-pikachu-banner.jpg");
-    background-size: 60%;
+    background-size: 65%;
+    border-radius: 30%;
 }
 
 .gamearea {
-    margin: 1%;
+    margin: 2% 0%;
+}
+
+.pokemonCard, form {
+    margin-bottom: 2%;
+    font-size: 125%;
 }
 
 .pokemonName {
     padding: 1%;
-}
-
-.pokemonCard {
-    margin-bottom: 2%;
+    font-size: 200%;
 }
 
 span {
     margin: 1%;
+}
+
+button {
+    padding: 1%;
+    background-color: #FFC300;
+    font-weight: bold;
+    border-radius: 30%;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.6
 }
