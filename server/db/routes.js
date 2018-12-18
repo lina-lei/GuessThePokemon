@@ -1,7 +1,9 @@
-let Pokemon = require('../Pokemon.js');
-let db = require('./index.js');
+const Pokemon = require('../Pokemon.js');
+const db = require('./index.js');
 
-module.exports.getOne = function(cb) {
-  let randomNum = Math.ceil(Math.random() * 151);
-  Pokemon.findOne({number: randomNum}, cb);
+function getOne(cb) {
+  const randomNum = Math.ceil(Math.random() * 151);
+  Pokemon.findOne({ number: randomNum }, cb);
 }
+
+module.exports.getOne = getOne;
