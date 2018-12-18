@@ -16,7 +16,6 @@ class App extends React.Component {
       displayName: '',
       image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
       playing: true,
-      messageToUser: '',
     };
     this.getOne = this.getOne.bind(this);
     this.handleCorrectGuess = this.handleCorrectGuess.bind(this);
@@ -34,7 +33,6 @@ class App extends React.Component {
           currentPokemon: results.data,
           image: 'http://i83.photobucket.com/albums/j284/zosifer/1237185489252.jpg',
           playing: true,
-          messageToUser: 'Who\'s This Pokemon?',
         });
       })
       .then(() => {
@@ -55,13 +53,12 @@ class App extends React.Component {
       displayName: currentPokemon.name,
       image: currentPokemon.imageUrl,
       playing: false,
-      messageToUser: 'You got it right! Play again?',
     });
   }
 
   render() {
     const {
-      currentPokemon, displayName, image, playing, messageToUser,
+      currentPokemon, displayName, image, playing,
     } = this.state;
     return (
       <div className="gamepage">
@@ -80,7 +77,6 @@ class App extends React.Component {
           <Form
             pokemonName={currentPokemon.name}
             playing={playing}
-            messageToUser={messageToUser}
             getOne={this.getOne}
             handleCorrectGuess={this.handleCorrectGuess}
           />

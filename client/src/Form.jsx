@@ -6,6 +6,7 @@ class Form extends React.Component {
     super(props);
     this.state = {
       userGuess: '',
+      messageToUser: 'Who\'s This Pokemon?',
     };
     this.userGuess = this.userGuess.bind(this);
     this.handleUserGuess = this.handleUserGuess.bind(this);
@@ -25,19 +26,25 @@ class Form extends React.Component {
       handleCorrectGuess();
       this.setState({
         userGuess: '',
+        messageToUser: 'You got it right! Play again?',
+      });
+    } else {
+      this.setState({
+        userGuess: '',
+        messageToUser: 'That\'s not right, try again!',
       });
     }
   }
 
   render() {
-    const { userGuess } = this.state;
-    const { playing, messageToUser, getOne } = this.props;
+    const { userGuess, messageToUser } = this.state;
+    const { playing, getOne } = this.props;
     if (playing) {
       return (
         <form onSubmit={this.handleUserGuess}>
           <label>{messageToUser}</label>
           <br />
-          <input type="text" value={userGuess} onChange={this.userGuess} autoFocus />
+          <input type="text" value={userGuess} onChange={this.userGuess} autoFocus style={{textAlign: "center"}} />
         </form>
       );
     }
@@ -54,7 +61,6 @@ class Form extends React.Component {
 Form.propTypes = {
   pokemonName: PropTypes.string.isRequired,
   playing: PropTypes.bool.isRequired,
-  messageToUser: PropTypes.string.isRequired,
   getOne: PropTypes.func.isRequired,
   handleCorrectGuess: PropTypes.func.isRequired,
 };
